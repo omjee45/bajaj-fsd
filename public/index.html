@@ -1,120 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BFHL Tree Analyzer</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 
 
-<div class="banner">
-    <h1>Node Hierarchy Analyzer</h1>
-    <p>Type in your node edges below and get the full tree structure back</p>
-</div>
-
-<div class="page-wrap">
-
-    <div class="box" id="input-box">
-        <h2>Input</h2>
-        <p class="hint">Enter edges like <code>A->B</code> separated by commas or new lines. Only single uppercase letters allowed.</p>
-
-        <label for="node-input">Edge List</label>
-        <textarea id="node-input" rows="5" placeholder="A->B, A->C, B->D&#10;X->Y, Y->Z, Z->X&#10;hello, 1->2"></textarea>
-
-        <div class="quick-fill">
-            <span>Examples: </span>
-            <button id="preset-basic">Basic</button>
-            <button id="preset-cycle">Cycle</button>
-            <button id="preset-full">Full</button>
-            <button id="preset-diamond">Diamond</button>
-        </div>
-
-        <div class="actions">
-            <button id="clear-btn" class="btn-outline">Clear</button>
-            <button id="submit-btn" class="btn-main">Submit &rarr;</button>
-        </div>
+    <div class="banner">
+        <h1>Node Hierarchy Analyzer</h1>
+        <p>Type in your node edges below and get the full tree structure back</p>
     </div>
 
-    <div id="output">
+    <div class="page-wrap">
 
-        <div id="error-card" class="box err-box hidden">
-            <p id="error-title">&#9888; Error</p>
-            <p id="error-msg"></p>
-            <button id="retry-btn" class="btn-outline">Try Again</button>
+        <div class="box" id="input-box">
+            <h2>Input</h2>
+            <p class="hint">Enter edges like <code>A->B</code> separated by commas or new lines. Only single uppercase
+                letters allowed.</p>
+
+            <label for="node-input">Edge List</label>
+            <textarea id="node-input" rows="5"
+                placeholder="A->B, A->C, B->D&#10;X->Y, Y->Z, Z->X&#10;hello, 1->2"></textarea>
+
+            <div class="quick-fill">
+                <span>Examples: </span>
+                <button id="preset-basic">Basic</button>
+                <button id="preset-cycle">Cycle</button>
+                <button id="preset-full">Full</button>
+                <button id="preset-diamond">Diamond</button>
+            </div>
+
+            <div class="actions">
+                <button id="clear-btn" class="btn-outline">Clear</button>
+                <button id="submit-btn" class="btn-main">Submit &rarr;</button>
+            </div>
         </div>
 
-        <div id="success-content" class="hidden">
+        <div id="output">
 
-            <div class="box">
-                <h2>Identity Info</h2>
-                <table class="id-table">
-                    <tr>
-                        <td>User ID</td>
-                        <td id="res-user-id">-</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td id="res-email">-</td>
-                    </tr>
-                    <tr>
-                        <td>Roll No</td>
-                        <td id="res-roll">-</td>
-                    </tr>
-                </table>
+            <div id="error-card" class="box err-box hidden">
+                <p id="error-title">&#9888; Error</p>
+                <p id="error-msg"></p>
+                <button id="retry-btn" class="btn-outline">Try Again</button>
             </div>
 
-            <div class="stats-grid">
-                <div class="stat-card green-top">
-                    <div class="big-num" id="stat-trees">0</div>
-                    <div>Valid Trees</div>
-                </div>
-                <div class="stat-card red-top">
-                    <div class="big-num" id="stat-cycles">0</div>
-                    <div>Cycles</div>
-                </div>
-                <div class="stat-card blue-top">
-                    <div class="big-num" id="stat-largest">-</div>
-                    <div>Largest Root</div>
-                </div>
-            </div>
+            <div id="success-content" class="hidden">
 
-            <div class="box">
-                <h2>Trees / Hierarchies</h2>
-                <div id="hierarchies-container"></div>
-            </div>
-
-            <div class="two-boxes">
                 <div class="box">
-                    <h2>Invalid Entries</h2>
-                    <div id="invalid-list" class="tag-list"></div>
+                    <h2>Identity Info</h2>
+                    <table class="id-table">
+                        <tr>
+                            <td>User ID</td>
+                            <td id="res-user-id">-</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td id="res-email">-</td>
+                        </tr>
+                        <tr>
+                            <td>Roll No</td>
+                            <td id="res-roll">-</td>
+                        </tr>
+                    </table>
                 </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card green-top">
+                        <div class="big-num" id="stat-trees">0</div>
+                        <div>Valid Trees</div>
+                    </div>
+                    <div class="stat-card red-top">
+                        <div class="big-num" id="stat-cycles">0</div>
+                        <div>Cycles</div>
+                    </div>
+                    <div class="stat-card blue-top">
+                        <div class="big-num" id="stat-largest">-</div>
+                        <div>Largest Root</div>
+                    </div>
+                </div>
+
                 <div class="box">
-                    <h2>Duplicate Edges</h2>
-                    <div id="duplicate-list" class="tag-list"></div>
+                    <h2>Trees / Hierarchies</h2>
+                    <div id="hierarchies-container"></div>
                 </div>
+
+                <div class="two-boxes">
+                    <div class="box">
+                        <h2>Invalid Entries</h2>
+                        <div id="invalid-list" class="tag-list"></div>
+                    </div>
+                    <div class="box">
+                        <h2>Duplicate Edges</h2>
+                        <div id="duplicate-list" class="tag-list"></div>
+                    </div>
+                </div>
+
+                <details class="box">
+                    <summary>See Full JSON Response</summary>
+                    <pre id="raw-json"></pre>
+                </details>
+
             </div>
-
-            <details class="box">
-                <summary>See Full JSON Response</summary>
-                <pre id="raw-json"></pre>
-            </details>
-
         </div>
+
     </div>
 
-</div>
+    <div class="footer">
+        Created By Omjee Kumar &middot; omjee1364.be23@chitkarauniversity.edu.in
+    </div>
 
-<div class="footer">
-    BFHL &middot; Omjee Kumar &middot; 2311981364
-</div>
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="spin"></div>
+    </div>
 
-<div id="loading-overlay" class="loading-overlay hidden">
-    <div class="spin"></div>
-</div>
-
-<script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
+
 </html>
